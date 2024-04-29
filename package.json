@@ -10,14 +10,30 @@
   },
   "dependencies": {
     "@plasmicapp/loader-nextjs": "^1.0.378",
+    "@supabase/auth-helpers-nextjs": "^0.9.0",
+    "@supabase/realtime-js": "^2.10.0-next.5",
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "latest",
+    "autoprefixer": "10.4.17",
+    "cookie": "^0.6.0",
+    "geist": "^1.2.1",
     "next": "14.2.3",
+    "postcss": "8.4.33",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwindcss": "3.4.1",
+    "typescript": "5.3.3"
+  },
+  "overrides": {
+    "@supabase/supabase-js": {
+      "@supabase/realtime-js": "^2.10.0-next.6"
+    }
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "encoding": "^0.1.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "typescript": "^5"
