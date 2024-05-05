@@ -10,6 +10,11 @@ export const PLASMIC = initPlasmicLoader({
       id: "886ZeSBi1byqCkxjYtM5Fz",
       token: "aTSEq0r2k2sE5uCCrhqr3aj02vWvgfa7it8rL8v0wIZKqkeOsdS7ol20auRk5eUfi2fyEKAw1VByjJlkoLFWbA",
     },
+     {
+      id: "2gYaa1FsuykK8CmmDLsakd",
+      token:
+        "zkbtAj2l3iBDwctQM3CJSJMszGv9cyx4sK5SvYJovmgTrcuA44jjJDrrFgX62nzxSdLHM5TJ2UWXl9qG5Gw",
+    },
   ],
 
   // By default Plasmic will use the last published version of your project.
@@ -32,6 +37,14 @@ PLASMIC.substituteComponent(AuthForm, "AuthForm");
 PLASMIC.registerComponent(AuthButton, {
   name :"AuthButton",
   props :{
+   children: "slot",
+    redirectOnSuccess: "string",
+  },
+  defaultStyles:{
+    display : "inline",
+    maxWidth : "2px",
+    height :"10px",
+    color :"red"
 
   }
 });
