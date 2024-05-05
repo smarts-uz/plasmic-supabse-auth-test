@@ -1,7 +1,8 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
+import { AuthButton } from "./components/AuthButton";
+import { AuthForm } from "./components/AuthForm";
 
-import AuthButton from "./components/AuthButton";
-import { SubmitButton } from "./components/submit-button";
+
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -17,6 +18,8 @@ export const PLASMIC = initPlasmicLoader({
   // only use this for development, as this is significantly slower.
   preview: true,
 });
+PLASMIC.substituteComponent(AuthButton, "AuthButton");
+PLASMIC.substituteComponent(AuthForm, "AuthForm");
 
 // You can register any code components that you want to use here; see
 // https://docs.plasmic.app/learn/code-components-ref/
@@ -25,15 +28,18 @@ export const PLASMIC = initPlasmicLoader({
 // http://localhost:3000/plasmic-host).  See
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
+
 PLASMIC.registerComponent(AuthButton, {
   name :"AuthButton",
   props :{
 
   }
 });
-PLASMIC.registerComponent(SubmitButton, {
-  name :"SubmitButton",
-  props :{
+// PLASMIC.registerComponent(AuthForm, {
+//   name :"AuthForm",
+//   props :{
+//     children :"slot",
 
-  }
-});
+//   }
+// });
+

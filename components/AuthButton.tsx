@@ -1,37 +1,30 @@
-import { createClient } from "@/pages/api/utils/supabase/client";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { PlasmicComponent, PlasmicRootProvider } from "@plasmicapp/loader-nextjs";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { mutate } from "swr";
+import { PLASMIC_AUTH_DATA_KEY } from "../utils/cache-keys";
 
-export default async function AuthButton() {
-  const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export function AuthButton(): JSX.Element {
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
+  const router = useRouter();
+  return (
+   
+      <PlasmicComponent
+        forceOriginal
+        component="AuthButton"
+        componentProps={{
+          logoutBtn: {
+            onClick: async () => {
+              await supabaseClient.auth.signOut();
+              await mutate(PLASMIC_AUTH_DATA_KEY);
+              router.reload();
+            },
+          },
+        }}
+      />
 
-  const signOut = async () => {
-    // "use server";
-
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    return redirect("/login");
-  };
-
-  return user ? (
-    <div className="flex items-center gap-4">
-      {user.email}{" "}
-      <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
-          Logout
-        </button>
-      </form>
-    </div>
-  ) : (
-    <Link
-      href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-    >
-      Login
-    </Link>
+  
   );
 }
